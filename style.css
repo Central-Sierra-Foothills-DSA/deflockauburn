@@ -38,6 +38,8 @@ button { font-family: inherit; cursor: pointer; border: none; }
   margin-bottom: 14px;
 }
 .eyebrow.light { color: #C9C6FF; }
+.whitebg {background: var(--white)}
+.section.whitebg { padding-bottom: 40px; max-width: none; }
 
 .light-h { color: var(--white); }
 .yellow-h { color: var(--black); background: var(--yellow); display: inline-block; padding: 2px 10px; }
@@ -221,7 +223,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
 }
 
 /* Hover state: Fades in and slides up seamlessly */
-.law-tooltip-container:hover .law-tooltip-text {
+.law-tooltip-container:hover .law-tooltip-text, .law-tooltip-container.active .law-tooltip-text {
   visibility: visible;
   opacity: 1;
   transform: translateX(-50%) translateY(0);
@@ -364,7 +366,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
   background: var(--white);
   color: var(--black);
 }
-.section-white > * { max-width: 1080px; margin-left: 0; margin-right: auto; }
+.section-white > * { max-width: 1080px; margin-left: auto; margin-right: auto; }
 .section-white h2 { color: var(--violet); }
 .section-white .eyebrow { color: #6A6D75; }
 .eyebrow-dim { color: #B8BAC0; }
@@ -437,7 +439,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
   padding-right: 0px;
   pointer-events: none;
 }
-.camera-photo { display: block; width: 450px; max-width: 90vw; height: auto; pointer-events: auto; }
+.camera-photo { display: block; width: 600px; max-width: 90vw; height: auto; pointer-events: auto; }
 
 /* ============ THE DATA SECTION ============ */
 #the-data {
@@ -474,7 +476,7 @@ button { font-family: inherit; cursor: pointer; border: none; }
 
 /* ============ AUDIT SECTION ============ */
 .audit-section {
-  padding-top: 30px;
+  padding-top: 30px; padding-bottom: 80px;
 }
 .audit-heading {
   font-family: var(--font-body);
@@ -565,6 +567,11 @@ tbody td {
   color: var(--white);
   margin-bottom: 10px;
 }
+
+.table-item-label a {
+text-decoration: underline;
+}
+
 .table-item-value {
   font-family: var(--font-mono);
   font-size: 24px;
@@ -647,14 +654,14 @@ tbody tr.ncric-row td {
   content: "‼";
   position: absolute;
   left: 14px;
-  margin-top: 10px;
+  margin-top: 13px;
   transform: translateY(-50%);
   color: var(--purple);
   font-size: 24px;
   font-weight: 700;
   line-height: 1;
 }
-.demand-item h3 { font-family: var(--font-body); font-size: 17px; font-weight: 700; text-transform: none; color: var(--purple); margin-bottom: 10px; }
+.demand-item h3 { font-family: var(--font-body); font-size: 17px; line-height:24px; font-weight: 700; text-transform: none; color: var(--purple); margin-bottom: 10px; }
 .demand-item p { font-size: 14px; color: #4A4A50; }
 
 /* ============ SCRIPT / DON'T KNOW WHAT TO SAY ============ */
@@ -811,6 +818,11 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 
 /* ============ RESPONSIVE ============ */
+
+@media (max-width: 1300px) {
+.camera-photo {width: 450px; }
+}
+
 @media (max-width: 900px) {
   .topnav { display: none; }
   .hero h1 { font-size: 48px; }
@@ -822,7 +834,9 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .concerns-grid { grid-template-columns: 1fr; }
   .learn-grid { grid-template-columns: 1fr; }
   .script-row { grid-template-columns: 1fr; }
-  .yellow-circle { margin: 0; transform: translateX(0) rotate(-6deg) !important; opacity: 1 !important; }
+  .yellow-circle { width: 140px; height: 140px; padding: 10px; margin-top:-100px; margin-right:-20px; margin-bottom:70px; transform: translateX(0) rotate(-6deg) !important; opacity: 1 !important; }
+  .yellow-circle p { font-size: 10px;}
+  .audit-heading { font-size: 22px; max-width: 340px;}
   .meeting-circles { justify-content: flex-start; margin-top: 20px; }
   .meeting-circle-violet { margin-top: -100px; }
   .audit-row { gap: 24px; }
@@ -849,6 +863,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 @media (max-width: 560px) {
   .stats-bar { grid-template-columns: 1fr; }
+  
   .whos-looking table {
     grid-template-columns: 1fr;
   }
@@ -856,7 +871,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   .concern-card h3 { font-size: 32px; }
   .camera-photo { width: 350px; margin-top: 80px; }
   .where-side { flex-direction: row; gap: 15px; }
-  .yellow-circle { width: 180px; height: 180px; padding: 20px; margin-top:-100px; margin-bottom:70px; }
+  .yellow-circle { width: 180px; height: 180px; padding: 20px; margin-top:-100px; margin-right:-20px; margin-bottom:70px; }
   .yellow-circle p { font-size: 10px; }
   .small-circle { width: 120px; height: 120px; padding: 14px; }
   .meeting-circles { justify-content: flex-start; width: 100%; flex-wrap: wrap; }
@@ -876,5 +891,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
     padding: 8px 12px;
     font-size: 12px;
   }
+  .audit-heading { font-size: 18px; max-width: 180px;}
+
 }
 }
