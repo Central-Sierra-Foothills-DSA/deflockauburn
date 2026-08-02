@@ -5,6 +5,25 @@ const observerOptions = {
 };
 
 
+// Mobile nav toggle
+const navToggle = document.getElementById('nav-toggle');
+const siteNav = document.getElementById('site-nav');
+if (navToggle && siteNav) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = siteNav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+
+  // Close the menu after tapping a link
+  siteNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      siteNav.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -22,6 +41,24 @@ document.querySelectorAll('.scroll-in-right').forEach(el => {
 
 
 // Copy to clipboard functionality
+// Extracts text while converting <br> tags to real newlines, so line
+// breaks in the source HTML (e.g. the consent line before "Thank you")
+// survive into the copied/pasted text instead of running words together.
+function getTextWithBreaks(el) {
+  if (!el) return '';
+  let text = '';
+  el.childNodes.forEach(node => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      text += node.textContent;
+    } else if (node.nodeName === 'BR') {
+      text += '\n';
+    } else {
+      text += node.textContent;
+    }
+  });
+  return text;
+}
+
 document.querySelectorAll('.copy-btn').forEach(btn => {
   btn.addEventListener('click', function() {
     const target = this.getAttribute('data-copy-target');
@@ -30,9 +67,9 @@ document.querySelectorAll('.copy-btn').forEach(btn => {
 
     if (target === 'script') {
       const activeScript = document.querySelector('.script-text:not([hidden])');
-      textToCopy = activeScript ? activeScript.textContent : '';
+      textToCopy = getTextWithBreaks(activeScript);
     } else if (target === 'email') {
-      textToCopy = document.getElementById('email-body-text').textContent;
+      textToCopy = getTextWithBreaks(document.getElementById('email-body-text'));
     }
 
 
@@ -86,3 +123,34 @@ document.addEventListener('click', () => {
   document.querySelectorAll('.law-tooltip-container.active')
     .forEach(el => el.classList.remove('active'));
 });
+
+
+// News coverage sort (Most Recent / A-Z) — Resources page
+const newsGrid = document.getElementById('news-grid');
+const newsSortBtns = document.querySelectorAll('.news-sort-btn');
+if (newsGrid && newsSortBtns.length) {
+  newsSortBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const mode = this.getAttribute('data-sort');
+
+      newsSortBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+
+      const cards = Array.from(newsGrid.querySelectorAll('.news-card'));
+
+      cards.sort((a, b) => {
+        if (mode === 'alpha') {
+          const titleA = a.querySelector('h3').textContent.trim().toLowerCase();
+          const titleB = b.querySelector('h3').textContent.trim().toLowerCase();
+          return titleA.localeCompare(titleB);
+        }
+        // 'recent': newest date first
+        const dateA = a.getAttribute('data-date') || '';
+        const dateB = b.getAttribute('data-date') || '';
+        return dateB.localeCompare(dateA);
+      });
+
+      cards.forEach(card => newsGrid.appendChild(card));
+    });
+  });
+}
