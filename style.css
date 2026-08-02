@@ -125,11 +125,12 @@ button { font-family: inherit; cursor: pointer; border: none; }
   color: var(--white);
 }
 .brand-yellow { color: var(--yellow); }
-.topnav { display: flex; gap: 26px; }
+.topbar-actions { display: flex; align-items: center; gap: 16px; }
+.topnav { display: flex; gap: 26px; align-items: flex-end; }
 .topnav a {
   color: var(--white);
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -137,6 +138,37 @@ button { font-family: inherit; cursor: pointer; border: none; }
   text-transform: uppercase;
 }
 .topnav a:hover { color: var(--yellow); }
+.topnav a.active { color: var(--yellow); }
+.topnav a.topnav-page-link {
+  font-size: 14px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.nav-arrow { font-size: 12px; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+}
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* ============ HERO ============ */
 .hero {
@@ -229,30 +261,31 @@ button { font-family: inherit; cursor: pointer; border: none; }
   transform: translateX(-50%) translateY(0);
 }
 
-/* Marquee band: light strip directly below the hero. The "diagonal hero
-   bottom" is created here, not on .hero itself — a navy overlay rotated
-   by the exact same transform as .marquee-wrap, so the cut edge and the
-   scrolling text are mathematically guaranteed to run parallel (a
-   clip-path computed via calc() and a rotate() transform are two
-   different rendering paths and can drift apart visually even at the
-   "same" angle — sharing one transform value removes that risk). */
+/* Marquee band: light strip directly below the hero. The dark diagonal
+   overlay (::before) and the tilted scrolling text (.marquee-wrap) must
+   stay visually parallel at every viewport width. A fixed-pixel height on
+   the diagonal would make its angle drift as the container gets wider or
+   narrower, while the text's rotate() stays fixed — so the two would only
+   line up at one screen width. Instead the diagonal's height is set in vw,
+   so height stays a constant proportion of width and its angle holds
+   steady at roughly the same -2.4deg as the text, at any screen size. */
 .marquee-band {
   background: var(--light-bg);
   position: relative;
   z-index: 2;
-  padding: 44px 0 20px;
+  padding: clamp(48px, 6vw, 75px) 0 18px;
   overflow: hidden;
 }
 .marquee-band::before {
+  --diag-h: clamp(90px, 13vw, 190px);
   content: "";
   position: absolute;
-  left: -10%;
-  width: 120%;
-  top: -74px;
-  height: 160px;
+  top: calc(-0.53 * var(--diag-h));
+  left: 0;
+  width: 100%;
+  height: var(--diag-h);
   background: #0C0B26;
-  transform: rotate(-2.4deg);
-  transform-origin: center;
+  clip-path: polygon(0 0, 100% 0, 100% 68%, 0 100%);
   z-index: 0;
 }
 .marquee-wrap {
@@ -473,6 +506,11 @@ button { font-family: inherit; cursor: pointer; border: none; }
   margin-left: 0;
   margin-right: 0;
 }
+#the-data .concern-list {
+  max-width: 720px;
+  margin-left: 0;
+  margin-right: 0;
+}
 
 /* ============ AUDIT SECTION ============ */
 .audit-section {
@@ -538,15 +576,22 @@ button { font-family: inherit; cursor: pointer; border: none; }
 }
 .concern-card p { font-size: 14px; color: var(--gray-text); }
 .concern-list { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; }
+ul.concern-list { max-width: 720px; }
 .concern-list li { font-size: 14px; color: var(--gray-text); padding-left: 16px; position: relative; }
+ul.concern-list li { font-size: 13px; }
 .concern-list li::before { content: "\2022"; position: absolute; left: 0; color: var(--yellow); }
 .concern-list a { color: #D9D68A; text-decoration: underline; }
 .concern-list a:hover { color: var(--yellow); }
+.concern-card .concern-list li { color: #D6D4DA; }
+#the-data .concern-list li { color: var(--black); }
+#the-data .concern-list li::before { color: var(--purple); }
+.more-news-row { max-width: 1080px; margin: 28px auto 0; text-align: right; }
 
 /* ============ WHO'S LOOKING ============ */
 .whos-looking { background: var(--light-bg); max-width: none; padding: 90px 28px; color: var(--black); }
 .whos-looking > * { max-width: 1080px; margin-left: 0; margin-right: auto; }
 .whos-looking .eyebrow { color: #6A6D75; }
+.whos-looking .lede { font-size: 13px; max-width: 720px; }
 .whos-looking h2 {
   text-align: center;
   color: var(--yellow);
@@ -628,6 +673,97 @@ tbody tr.ncric-row td {
 .learn-icon { color: var(--yellow); font-size: 20px; }
 .learn-card p { font-size: 14px; color: var(--gray-text); }
 
+/* ============ CALENDAR ============ */
+.calendar-section { background: #0c0745; max-width: none; padding: 90px 28px; }
+.calendar-content {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+.calendar-text { flex: 1; min-width: 0; }
+.calendar-text .lede { margin-bottom: 18px; }
+.calendar-section .citation { color: var(--gray-text); margin: 0; }
+.calendar-embed {
+  flex: 0 0 auto;
+  width: 480px;
+  max-width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line-dark);
+  margin: 0;
+}
+.calendar-embed iframe { display: block; width: 100%; }
+@media (max-width: 900px) {
+  .calendar-content { flex-direction: column; align-items: flex-start; gap: 34px; }
+  .calendar-embed { width: 100%; max-width: 480px; }
+}
+
+/* ============ NEWS ARCHIVE PAGE ============ */
+.page-header {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 70px 28px 20px;
+}
+.page-header h1 { font-size: 44px; color: var(--white); margin-bottom: 14px; }
+.news-sort {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 34px;
+}
+.news-sort-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--gray-text);
+  margin-right: 4px;
+}
+.news-sort-btn {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .04em;
+  color: var(--gray-text);
+  background: transparent;
+  border: 1px solid var(--line-dark);
+  border-radius: 20px;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: border-color .15s ease, color .15s ease;
+}
+.news-sort-btn:hover { color: var(--white); border-color: var(--gray-text); }
+.news-sort-btn.active { color: #0C0B26; background: var(--yellow); border-color: var(--yellow); font-weight: 700; }
+.news-grid {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 34px;
+}
+.news-card {
+  background: var(--card-black);
+  border: 1px solid var(--line-dark);
+  border-radius: 4px;
+  padding: 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color .15s ease;
+}
+.news-card:hover { border-color: var(--yellow); }
+.news-card:hover h3 { color: var(--yellow); }
+.news-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #6A6D75;
+}
+.news-card h3 { font-size: 18px; color: var(--white); transition: color .15s ease; }
+.news-card p { font-size: 14px; color: var(--gray-text); }
+
 /* ============ CTA BANNER ============ */
 .cta-banner {
   background: var(--purple);
@@ -665,7 +801,7 @@ tbody tr.ncric-row td {
 .demand-item p { font-size: 14px; color: #4A4A50; }
 
 /* ============ SCRIPT / DON'T KNOW WHAT TO SAY ============ */
-.script-section { max-width: none; background: #1F2734; padding: 90px 28px; text-align: left; }
+.script-section { max-width: none; background: #0c0745; padding: 90px 28px 50px; text-align: left; }
 .script-section > .eyebrow { display: block; width: 100%; text-align: left; }
 .script-section > p:first-of-type { max-width: 1080px; margin-left: 0; margin-right: auto; }
 .script-section > h2 { max-width: 1080px; margin-left: 0; margin-right: auto; }
@@ -824,7 +960,24 @@ a:focus-visible, button:focus-visible, input:focus-visible {
 }
 
 @media (max-width: 900px) {
-  .topnav { display: none; }
+  .nav-toggle { display: flex; }
+  .topbar-inner { position: relative; flex-wrap: wrap; }
+  .topnav {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #1F2734;
+    border-bottom: 1px solid var(--line-dark);
+    padding: 22px 28px 26px;
+  }
+  .topnav.open { display: flex; }
+  .topnav a { font-size: 13px; }
+  .topnav a.topnav-page-link { font-size: 15px; }
   .hero h1 { font-size: 48px; }
   .stats-bar { grid-template-columns: 1fr 1fr; }
   .where-grid { grid-template-columns: 1fr; }
