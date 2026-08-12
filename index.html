@@ -48,7 +48,7 @@
   without a warrant, with no public oversight, and at your own expense. Explore the data and stand with your neighbors to take action.
 </p>    <div class="hero-actions">
       <a href="#submit-comment" class="btn btn-yellow btn-hero">Submit Public Comment</a>
-      <a href="https://c.org/gNQ7NQNtGc" class="btn btn-outline-yellow" target="_blank" rel="noopener noreferrer">Sign the Petition</a> 
+      <!-- <a href="https://www.change.org/PASTE-YOUR-PETITION-SLUG-HERE" class="btn btn-outline-yellow" target="_blank" rel="noopener noreferrer">Sign the Petition</a> -->
       <a href="#whats-happening" class="link-secondary">What's happening &darr;</a>
     </div>
   </div>
@@ -107,8 +107,17 @@
     </div>
 
     <div class="where-side">
-      <div class="yellow-circle scroll-in-right" style="margin-top: 20px;">
-        <p> Flock cameras often have: <strong>Black housing &middot; Teardrop shape &middot; Usually with solar panels</strong></p>
+      <div class="where-circle-wrap">
+        <div class="yellow-circle scroll-in-right" style="margin-top: 20px;">
+          <p> Flock cameras often have: <strong>Black housing &middot; Teardrop shape &middot; Usually with solar panels</strong></p>
+        </div>
+
+        <button type="button" class="seen-btn" id="seen-in-auburn-open" aria-haspopup="dialog" aria-controls="seen-in-auburn-modal">
+          <span class="seen-btn-icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 1V15M1 8H15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </span>
+          Spot the flock!
+        </button>
       </div>
     </div>
   </div>
@@ -129,7 +138,7 @@
       <img src="icons/lock.svg" alt="" class="concern-icon">
       <h3>PRIVACY + DATA SHARING</h3>
       <ul class="concern-list">
-        <li> On June 13, 2022, Auburn police told City Council <strong>"We want it to be that you can't enter the city of Auburn without your license plate being scanned."</strong> They got their wish: cameras now track your license plate, location, time, and direction of travel. They record pedestrian activity, perceived demographics (<a href="https://www.instagram.com/p/DTJTVm-Ekmi/">race, gender, height, weight,</a> and any unique identifiers. 
+        <li> On June 13, 2022, Auburn police told City Council <strong>"We want it to be that you can't enter the city of Auburn without your license plate being scanned."</strong> They got their wish: cameras now track your license plate, location, time, and direction of travel. They record pedestrian activity, perceived demographics (<a href="https://patentimages.storage.googleapis.com/77/9a/03/7b3b26499077d4/US11416545.pdf">race, gender, height, weight</a>), and any unique identifiers. 
           And all that data is now under corporate control.</li>
         <li>The service contract between Auburn PD and Flock give the company a broad license to use Auburn's data, including a <strong>perpetual, irrevocable, worldwide, royalty-free, fully paid license</strong> to use, reproduce, modify, and distribute your data (Service Agreement, section 4.2).</li>
         <li>ALPRs can be extended with ever-more-invasive surveillance technology, such as sensors that <a href="https://www.404media.co/this-company-will-add-phone-airpod-and-smartwatch-trackers-to-license-plate-readers/">track the unique identifiers</a> in your phone, your wearables, your infotainment systems, your Bluetooth devices- even your pet's microchip- to enable identification. </li>
@@ -141,7 +150,7 @@
       <ul class="concern-list">
         <li>Auburn's 2022 service agreement with Flock Group Inc. showed costs of $2,500 - $3,250 per camera; in 2023 PCSO approved a 2-year, $236,600 contract for 42 Flock cameras. Meanwhile, many of them end up stolen, vandalized, stripped for parts, or <a href="https://www.gadgetreview.com/auburn-california-flock-surveillance-cameras-stolen-and-dumped-in-a-canal/">dumped in the canal</a>.</li>
         <li>There is no evidence to suggest that either Auburn's or Placer County's ALPR cameras have been effective at solving or preventing crime; data from Atlanta has shown both their extensive Flock and Axon surveillance systems <a href="https://atlpresscollective.com/2026/07/28/flock-cameras-atlanta-clearance-rates/">have not improved clearance rates</a>.</li>
-        <li>The millions of documented instances of access from out-of-state and federal agencies leave the city's finances at risk of the exact type of lawsuit that affected the city of El Cajon, while additionally leaving the city vulnerable to legal action for Constitutional violations. </li>
+        <li>The millions of documented instances of access from out-of-state and federal agencies leave the city's finances at risk of the exact type of lawsuit that affected the city of El Cajon. It also leaves the city vulnerable to legal action for Constitutional violations, as the Supreme Count has ruled that </li>
       </ul>
     </div>
     <div class="concern-card">
@@ -309,7 +318,7 @@
   <h2>Get the Flock Out.</h2>
   <p>Attend a Board of Supervisors or City Council meeting. Talk to your neighbors. Share what you found here. Surveillance only works when people don't know it's happening.</p>
   <div class="cta-actions">
-   <a href="https://c.org/gNQ7NQNtGc" class="btn btn-dark-on-purple" target="_blank" rel="noopener noreferrer">Sign the Petition</a>
+    <!-- <a href="https://www.change.org/PASTE-YOUR-PETITION-SLUG-HERE" class="btn btn-dark-on-purple" target="_blank" rel="noopener noreferrer">Sign the Petition</a> -->
     <a href="mailto:DeflockAuburnCA@proton.me" class="btn btn-dark-on-purple">Contact the Working Group</a>
     <a href="https://ca-auburn.civicplus.com/Directory.aspx?DID=7" class="link-arrow light">Auburn City Council Agenda Request &rarr;</a>
   </div>
@@ -474,6 +483,81 @@ Thank you for your consideration,
     </div>
   </div>
 </footer>
+
+<!-- SEEN IN AUBURN — modal carousel -->
+<!--
+  TEMPLATE FOR A NEW ENTRY — copy this block, fill it in, and paste it
+  anywhere inside .seen-track (order = carousel order):
+
+  <figure class="seen-slide">
+    <div class="seen-slide-media">
+      <img src="[IMAGE PATH]" alt="[SHORT DESCRIPTION OF WHAT'S IN THE PHOTO]">
+    </div>
+    <figcaption>
+      <h4>[LOCATION NAME / CROSS STREETS]</h4>
+      <p>[One or two sentences: when it was spotted, mount type, anything notable.]</p>
+    </figcaption>
+  </figure>
+-->
+<div class="modal-overlay" id="seen-in-auburn-modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="seen-in-auburn-title">
+    <div class="modal-header">
+      <h3 id="seen-in-auburn-title">Can you spot the Flock?</h3>
+      <button type="button" class="modal-close" id="seen-in-auburn-close" aria-label="Close gallery">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-intro">Camera locations spotted and reported by Auburn residents. Want to add one? <a href="mailto:DeflockAuburnCA@proton.me">Let us know</a> or add it to the map.</p>
+
+      <div class="seen-carousel">
+        <button type="button" class="carousel-nav carousel-prev" id="seen-prev" aria-label="Previous photo">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2L4 8L10 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <div class="seen-track-wrap">
+          <div class="seen-track" id="seen-track">
+
+            <figure class="seen-slide">
+              <div class="seen-slide-media">
+                <img src="LincolnMaple.png" alt="ALPR camera on a streetlight with a solar panel, in front of the Auburn courthouse">
+              </div>
+              <figcaption>
+                <h4>Maple St. and Lincoln Way</h4>
+                <p>Our iconic courthouse, surveilled by the Flock camera w/ solar panel, on the streetlight to the right.</p>
+              </figcaption>
+            </figure>
+
+            <figure class="seen-slide">
+              <div class="seen-slide-media">
+                <img src="Elm.png" alt="ALPR camera on a pole blocking shopping center signs, against a blue sky">
+              </div>
+              <figcaption>
+                <h4>Auburn Town Center on Elm St.</h4>
+                <p>Visible from the intersection, this camera is mounted on a pole and blocks the shopping center signage.</p>
+              </figcaption>
+            </figure>
+
+            <figure class="seen-slide">
+              <div class="seen-slide-media">
+                <img src="StPauls.png" alt="ALPR camera on a pole with a solar panel, next to church entrance">
+              </div>
+              <figcaption>
+                <h4>St. Paul's Church</h4>
+                <p>This one watches everyone who goes to the Lutheran church.</p>
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
+
+        <button type="button" class="carousel-nav carousel-next" id="seen-next" aria-label="Next photo">
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 2L12 8L6 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="carousel-dots" id="seen-dots"></div>
+    </div>
+  </div>
+</div>
 
 <script src="script.js"></script>
   <!-- Default Statcounter code for deflock auburn http://www.deflockauburnca.com
