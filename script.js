@@ -125,6 +125,70 @@ document.addEventListener('click', () => {
 });
 
 
+// Seen in Auburn — modal carousel
+const seenOpenBtn = document.getElementById('seen-in-auburn-open');
+const seenModal = document.getElementById('seen-in-auburn-modal');
+const seenCloseBtn = document.getElementById('seen-in-auburn-close');
+const seenTrack = document.getElementById('seen-track');
+const seenPrevBtn = document.getElementById('seen-prev');
+const seenNextBtn = document.getElementById('seen-next');
+const seenDotsWrap = document.getElementById('seen-dots');
+
+if (seenOpenBtn && seenModal && seenCloseBtn && seenTrack) {
+  const slides = Array.from(seenTrack.querySelectorAll('.seen-slide'));
+  let currentSlide = 0;
+
+  // Build dots to match however many slides exist, so this stays correct
+  // even as slides are added/removed from the template.
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'carousel-dot';
+    dot.setAttribute('aria-label', `Go to photo ${i + 1} of ${slides.length}`);
+    dot.addEventListener('click', () => goToSlide(i));
+    seenDotsWrap.appendChild(dot);
+  });
+  const dots = Array.from(seenDotsWrap.querySelectorAll('.carousel-dot'));
+
+  function goToSlide(index) {
+    currentSlide = (index + slides.length) % slides.length;
+    seenTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === currentSlide));
+  }
+
+  if (seenPrevBtn) seenPrevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+  if (seenNextBtn) seenNextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+  const openSeenModal = () => {
+    seenModal.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    goToSlide(0);
+    seenCloseBtn.focus();
+  };
+  const closeSeenModal = () => {
+    seenModal.setAttribute('hidden', '');
+    document.body.style.overflow = '';
+    seenOpenBtn.focus();
+  };
+
+  seenOpenBtn.addEventListener('click', openSeenModal);
+  seenCloseBtn.addEventListener('click', closeSeenModal);
+
+  // Close when clicking the dark overlay itself, not the modal content
+  seenModal.addEventListener('click', (e) => {
+    if (e.target === seenModal) closeSeenModal();
+  });
+
+  // Escape closes the modal; left/right arrows navigate slides
+  document.addEventListener('keydown', (e) => {
+    if (seenModal.hasAttribute('hidden')) return;
+    if (e.key === 'Escape') closeSeenModal();
+    if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+    if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+  });
+}
+
+
 // News coverage sort (Most Recent / A-Z) — Resources page
 const newsGrid = document.getElementById('news-grid');
 const newsSortBtns = document.querySelectorAll('.news-sort-btn');
