@@ -568,6 +568,39 @@ button { font-family: inherit; cursor: pointer; border: none; }
 .modal-intro a { color: #D9D68A; text-decoration: underline; }
 .modal-intro a:hover { color: var(--yellow); }
 
+.cta-banner p a,
+.script-section .script-text a,
+.calendar-section .calendar-text .citation a,
+.email-section .lede a {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  transition: color .15s ease, text-decoration-color .15s ease, opacity .15s ease;
+}
+
+.cta-banner p a {
+  color: var(--white);
+  text-decoration-color: var(--white);
+}
+.cta-banner p a:hover {
+  color: var(--white);
+  text-decoration-color: var(--white);
+  opacity: 0.85;
+}
+
+.script-section .script-text a,
+.calendar-section .calendar-text .citation a,
+.email-section .lede a {
+  color: var(--yellow);
+  text-decoration-color: var(--yellow);
+}
+.script-section .script-text a:hover,
+.calendar-section .calendar-text .citation a:hover,
+.email-section .lede a:hover {
+  color: #FFF9A8;
+  text-decoration-color: #FFF9A8;
+}
+
 /* Carousel: one slide at a time. .seen-track-wrap clips to the visible
    slide; .seen-track holds all slides in a row and is translated by
    -100% * index. Nav buttons are flex siblings of the track wrapper
