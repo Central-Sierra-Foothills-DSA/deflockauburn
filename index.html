@@ -393,21 +393,41 @@
   <p class="eyebrow">LEARN</p>
   <h2>FIND OUT MORE</h2>
 
-  <div class="learn-grid">
-    <a href="https://deflocknc.com/flock-101.html" class="learn-card">
-      <div class="learn-card-top">
-        <h3>FLOCK 101</h3>
-        <img src="icons/square-arrow-out-up-right.svg" alt="" class="learn-icon" aria-hidden="true">
+  <div class="learn-carousel" role="region" aria-label="Learning resources" aria-roledescription="carousel">
+    <div class="learn-viewport" id="learn-viewport" tabindex="0" aria-label="Resource tiles">
+      <div class="learn-track" id="learn-track">
+        <a href="https://nothing-to-hide---alpr-guide.web.app/" class="learn-card" target="_blank" rel="noopener noreferrer" aria-roledescription="slide" aria-label="Nothing to Hide? ALPR guide, 1 of 3">
+          <div class="learn-card-top">
+            <h3>NOTHING TO HIDE?</h3>
+            <img src="icons/square-arrow-out-up-right.svg" alt="" class="learn-icon" aria-hidden="true">
+          </div>
+          <p>A fact-based guide to license plate readers and surveillance networks, with an executive summary and hundreds of sources to help you explore the evidence and draw your own conclusions.</p>
+        </a>
+        <a href="https://deflocknc.com/flock-101.html" class="learn-card" aria-roledescription="slide" aria-label="Flock 101, 2 of 3">
+          <div class="learn-card-top">
+            <h3>FLOCK 101</h3>
+            <img src="icons/square-arrow-out-up-right.svg" alt="" class="learn-icon" aria-hidden="true">
+          </div>
+          <p>Flock is a private surveillance company that builds automated license plate recognition (ALPR) cameras used by police departments, HOAs, and private businesses. Each camera photographs plate, make, model, and color, and timestamps the location.</p>
+        </a>
+        <a href="https://deflocknc.com/cpra.html" class="learn-card" aria-roledescription="slide" aria-label="CPRA Toolkit, 3 of 3">
+          <div class="learn-card-top">
+            <h3>CPRA TOOLKIT</h3>
+            <img src="icons/square-arrow-out-up-right.svg" alt="" class="learn-icon" aria-hidden="true">
+          </div>
+          <p>Learn how to file a California Public Records Act request to obtain audit logs, vendor contracts, and retention policies — use our template to request the same records we did.</p>
+        </a>
       </div>
-      <p>Flock is a private surveillance company that builds automated license plate recognition (ALPR) cameras used by police departments, HOAs, and private businesses. Each camera photographs plate, make, model, and color, and timestamps the location.</p>
-    </a>
-    <a href="https://deflocknc.com/cpra.html" class="learn-card">
-      <div class="learn-card-top">
-        <h3>CPRA TOOLKIT</h3>
-        <img src="icons/square-arrow-out-up-right.svg" alt="" class="learn-icon" aria-hidden="true">
-      </div>
-      <p>Learn how to file a California Public Records Act request to obtain audit logs, vendor contracts, and retention policies — use our template to request the same records we did.</p>
-    </a>
+    </div>
+    <div class="learn-carousel-controls">
+      <button type="button" class="carousel-nav" id="learn-prev" aria-label="Previous resource">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 2L4 8L10 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="carousel-dots" id="learn-dots" aria-label="Choose a resource"></div>
+      <button type="button" class="carousel-nav" id="learn-next" aria-label="Next resource">
+        <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6 2L12 8L6 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
   </div>
   <div class="more-news-row"><a href="resources.html" class="link-arrow">More resources &rarr;</a></div>
 </section>

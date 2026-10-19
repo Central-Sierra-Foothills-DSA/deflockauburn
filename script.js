@@ -124,6 +124,61 @@ document.addEventListener('click', () => {
     .forEach(el => el.classList.remove('active'));
 });
 
+// Learn resources carousel
+const learnViewport = document.getElementById('learn-viewport');
+const learnTrack = document.getElementById('learn-track');
+const learnPrevBtn = document.getElementById('learn-prev');
+const learnNextBtn = document.getElementById('learn-next');
+const learnDotsWrap = document.getElementById('learn-dots');
+
+if (learnViewport && learnTrack && learnPrevBtn && learnNextBtn && learnDotsWrap) {
+  const learnSlides = Array.from(learnTrack.querySelectorAll('.learn-card'));
+  let currentLearnSlide = 0;
+
+  learnSlides.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'carousel-dot';
+    dot.setAttribute('aria-label', `Go to resource ${index + 1} of ${learnSlides.length}`);
+    dot.addEventListener('click', () => goToLearnSlide(index));
+    learnDotsWrap.appendChild(dot);
+  });
+  const learnDots = Array.from(learnDotsWrap.querySelectorAll('.carousel-dot'));
+
+  function updateLearnCarousel() {
+    const viewportLeft = learnViewport.getBoundingClientRect().left;
+    currentLearnSlide = learnSlides.reduce((closestIndex, slide, index) => {
+      const closestDistance = Math.abs(
+        learnSlides[closestIndex].getBoundingClientRect().left - viewportLeft
+      );
+      const distance = Math.abs(slide.getBoundingClientRect().left - viewportLeft);
+      return distance < closestDistance ? index : closestIndex;
+    }, 0);
+
+    learnDots.forEach((dot, index) => {
+      if (index === currentLearnSlide) dot.setAttribute('aria-current', 'true');
+      else dot.removeAttribute('aria-current');
+    });
+    learnPrevBtn.disabled = currentLearnSlide === 0;
+    learnNextBtn.disabled = currentLearnSlide === learnSlides.length - 1;
+  }
+
+  function goToLearnSlide(index) {
+    const slide = learnSlides[index];
+    const offset = slide.getBoundingClientRect().left - learnViewport.getBoundingClientRect().left;
+    learnViewport.scrollTo({
+      left: learnViewport.scrollLeft + offset,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+    });
+    currentLearnSlide = index;
+  }
+
+  learnPrevBtn.addEventListener('click', () => goToLearnSlide(currentLearnSlide - 1));
+  learnNextBtn.addEventListener('click', () => goToLearnSlide(currentLearnSlide + 1));
+  learnViewport.addEventListener('scroll', updateLearnCarousel, { passive: true });
+  window.addEventListener('resize', updateLearnCarousel);
+  updateLearnCarousel();
+}
 
 // Seen in Auburn — modal carousel
 const seenOpenBtn = document.getElementById('seen-in-auburn-open');
